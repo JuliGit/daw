@@ -11,25 +11,46 @@ import { MatCardModule } from '@angular/material/card';
   styleUrl: './posts.component.css'
 })
 export class PostsComponent {
-  posts: any[] = [];
 
   constructor(private postService:PostService) { }
 
+  posts: any[] = [];
+  currentPage = 1;
+  limit = 5; // ✅ Number of posts per page
   isLoading = true;
-hasError = false;
+  hasError = false;
 
-ngOnInit(): void {
-  this.postService.getPosts().subscribe({
-    next: (data) => {
-      this.posts = data;
-      this.isLoading = false;
-      console.log(data);
-    },
-    error: () => {
-      this.hasError = true;
-      this.isLoading = false;
+  ngOnInit(): void {
+    this.fetchPosts();
+  }
+
+  fetchPosts(): void {
+    this.isLoading = true;
+    this.hasError = false;
+
+    this.postService.getPosts(this.limit, this.currentPage).subscribe({
+      next: (data) => {
+        this.posts = data;
+        this.isLoading = false;
+      },
+      error: () => {
+        this.hasError = true;
+        this.isLoading = false;
+      }
+    });
+  }
+
+  nextPage(): void {
+    this.currentPage++;
+    this.fetchPosts();
+  }
+
+  prevPage(): void {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+      this.fetchPosts();
     }
-  });
-}
+  }
 
 }
+

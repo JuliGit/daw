@@ -11,7 +11,8 @@ export class PostService {
 
   constructor(private http:HttpClient) { }
 
-  getPosts():Observable <any> {
-    return this.http.get(this.apiUrl);
+  getPosts(limit: number = 10, page: number = 1): Observable<any> {
+    const start = (page - 1) * limit;
+    return this.http.get<any>(`${this.apiUrl}?_start=${start}&_limit=${limit}`);
   }
 }
