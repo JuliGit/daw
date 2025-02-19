@@ -15,11 +15,21 @@ export class PostsComponent {
 
   constructor(private postService:PostService) { }
 
-  ngOnInit() {
-    this.postService.getPosts().subscribe((data:any[]) => {
-      console.log(data);
+  isLoading = true;
+hasError = false;
+
+ngOnInit(): void {
+  this.postService.getPosts().subscribe({
+    next: (data) => {
       this.posts = data;
-    });
-  }
+      this.isLoading = false;
+      console.log(data);
+    },
+    error: () => {
+      this.hasError = true;
+      this.isLoading = false;
+    }
+  });
+}
 
 }
