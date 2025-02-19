@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { PostsComponent } from './posts/posts.component';
+import { PostModule } from './posts/post.module';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [PostsComponent],
+  imports: [PostModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
