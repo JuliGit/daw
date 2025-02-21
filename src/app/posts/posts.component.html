@@ -1,14 +1,24 @@
-<button (click)="prevPage()" [disabled]="currentPage === 1">Previous</button>
-<button (click)="nextPage()">Next</button>
-<br>
-<div *ngIf="isLoading">Loading posts...</div>
-<div *ngIf="!isLoading">
-    <mat-card *ngFor="let post of posts" class="post-card">
-        <mat-card-header>
-            <mat-card-title>{{ post.title }}</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-            <p>{{ post.body }}</p>
-        </mat-card-content>
-    </mat-card>
+<div class="a">
+    <button (click)="prevPage()" [disabled]="currentPage === 1">Previous</button>
+    <button (click)="nextPage()">Next</button>
+    <br>
+
+    <!-- Loader mientras carga -->
+    <div *ngIf="isLoading" class="loading-container">
+        <video class="loader" width="256" height="256" preload="none"
+            style="background: transparent url('https://cdn-icons-png.flaticon.com/512/17122/17122456.png') 50% 50% / fit no-repeat;"
+            autoplay loop muted playsinline>
+            <source src="https://cdn-icons-mp4.flaticon.com/512/17122/17122456.mp4" type="video/mp4">
+        </video>
+    </div>
+
+    <!-- Lista de posts -->
+    <div *ngIf="!isLoading">
+        <mat-card *ngFor="let post of posts" class="post-card" (click)="goToPostDetail(post.id)">
+            <mat-card-header>
+                <mat-card-title>{{ post.title }}</mat-card-title>
+            </mat-card-header>
+        </mat-card>
+    </div>
 </div>
+

@@ -2,3 +2,21 @@
     margin: 15px;
     padding: 10px;
   }
+
+.a {
+  padding-top: 60px;
+}
+
+.loading-container {
+  padding-top: 250px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+  margin-top: 20px;
+}
+
+.loader {
+  width: 200px;
+  height: 200px;
+}

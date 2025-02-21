@@ -3,6 +3,7 @@ import { PostService } from './post.service';
 import { CommonModule } from '@angular/common';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatCardModule } from '@angular/material/card';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-posts',
@@ -12,11 +13,11 @@ import { MatCardModule } from '@angular/material/card';
 })
 export class PostsComponent {
 
-  constructor(private postService:PostService) { }
+  constructor(private postService:PostService, private router:Router) { }
 
   posts: any[] = [];
   currentPage = 1;
-  limit = 5; // ✅ Number of posts per page
+  limit = 10;
   isLoading = true;
   hasError = false;
 
@@ -50,6 +51,10 @@ export class PostsComponent {
       this.currentPage--;
       this.fetchPosts();
     }
+  }
+
+  goToPostDetail(postId: number) {
+    this.router.navigate(['/posts', postId]);
   }
 
 }
