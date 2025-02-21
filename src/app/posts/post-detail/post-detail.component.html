@@ -1,0 +1,24 @@
+<div *ngIf="isLoading" class="loading-container">
+    <video class="loader" width="100" height="100" preload="none"
+        style="background: transparent url('https://cdn-icons-png.flaticon.com/512/17122/17122456.png') 50% 50% / fit no-repeat;"
+        autoplay loop muted playsinline>
+        <source src="https://cdn-icons-mp4.flaticon.com/512/17122/17122456.mp4" type="video/mp4">
+    </video>
+</div>
+
+<div *ngIf="!isLoading && post" class="post-detail-container">
+    <mat-card class="post-detail-card">
+        <mat-card-header>
+            <mat-card-title>{{ post.title }}</mat-card-title>
+            <mat-card-subtitle>Publicado por el usuario #{{ post.userId }}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+            <p>{{ post.body }}</p>
+        </mat-card-content>
+        <mat-divider></mat-divider>
+        <mat-card-actions align="end">
+            <button mat-button color="primary" (click)="goBack()">Volver a la lista</button>
+        </mat-card-actions>
+    </mat-card>
+</div>
+

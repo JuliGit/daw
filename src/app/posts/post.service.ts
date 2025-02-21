@@ -15,4 +15,8 @@ export class PostService {
     const start = (page - 1) * limit;
     return this.http.get<any>(`${this.apiUrl}?_start=${start}&_limit=${limit}`);
   }
+
+  getPostById(id: number): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/${id}`);
+  }
 }
