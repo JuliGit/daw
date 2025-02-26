@@ -1,0 +1,21 @@
+<h2>Unsplash Image Gallery</h2>
+
+<div *ngIf="isLoading">Loading images...</div>
+<div *ngIf="hasError">Failed to load images. Please try again later.</div>
+
+<div *ngIf="!isLoading && !hasError" class="image-grid">
+  <mat-card *ngFor="let image of images" class="image-card">
+    <img mat-card-image [src]="image.urls.small" [alt]="image.alt_description">
+    <mat-card-content>
+      <p>{{ image.description || 'No description' }}</p>
+      <a [href]="image.links.html" target="_blank">View on Unsplash</a>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- Pagination Controls -->
+  <div class="pagination">
+    <button mat-button (click)="prevPage()" [disabled]="currentPage === 1">Previous</button>
+    <span>Page {{ currentPage }}</span>
+    <button mat-button (click)="nextPage()">Next</button>
+  </div>
+</div>
